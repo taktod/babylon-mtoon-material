@@ -172,6 +172,9 @@ export class MToonMaterialDefines extends MaterialDefines implements IImageProce
     public ORDER_INDEPENDENT_TRANSPARENCY = false;
     public ORDER_INDEPENDENT_TRANSPARENCY_16BITS = false;
 
+    // additionals
+    public DITHER = false;
+
     // /**
     //  * If the reflection texture on this material is in linear color space
     //  * @hidden

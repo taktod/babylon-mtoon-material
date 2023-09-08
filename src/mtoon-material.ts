@@ -20,6 +20,7 @@ import { Material } from '@babylonjs/core/Materials/material';
 import type { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial';
 import { PushMaterial } from '@babylonjs/core/Materials/pushMaterial';
 import { MaterialHelper } from '@babylonjs/core/Materials/materialHelper';
+import { bindClipPlane } from '@babylonjs/core/Materials/clipPlaneMaterialHelper.js'
 
 import type { BaseTexture } from '@babylonjs/core/Materials/Textures/baseTexture';
 import type { RenderTargetTexture } from '@babylonjs/core/Materials/Textures/renderTargetTexture';
@@ -1139,7 +1140,7 @@ export class MToonMaterial extends PushMaterial {
         );
 
         // Values that need to be evaluated on every frame
-        MaterialHelper.PrepareDefinesForFrameBoundValues(scene, engine, defines, useInstances, null, subMesh.getRenderingMesh().hasThinInstances);
+        MaterialHelper.PrepareDefinesForFrameBoundValues(scene, engine, this, defines, useInstances, null, subMesh.getRenderingMesh().hasThinInstances);
 
         // External config
         this._eventInfo.defines = defines;
@@ -1593,7 +1594,8 @@ export class MToonMaterial extends PushMaterial {
             this._callbackPluginEventBindForSubMesh(this._eventInfo);
 
             // Clip plane
-            MaterialHelper.BindClipPlane(effect, scene);
+            bindClipPlane(effect, this, scene);
+            //MaterialHelper.BindClipPlane(effect, scene);
 
             // Colors
             this.bindEyePosition(effect);
